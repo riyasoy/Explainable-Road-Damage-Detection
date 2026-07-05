@@ -1,7 +1,9 @@
-# Explainable Road Damage Detection
+# Explainable Road Damage Detection using YOLOv8 and Grad-CAM
 
-This project explores automated road damage detection using YOLOv8 and Explainable AI (XAI) techniques such as Grad-CAM.
+## Overview
 
-The goal is to build an interpretable computer vision system that can detect road damage while providing visual explanations for its predictions.
+This project investigates automated road damage detection using the YOLOv8 object detection framework together with Explainable AI (XAI) techniques, specifically Grad-CAM.
 
-Status: 🚧 In Progress
+The objective is to develop an interpretable computer vision system capable of detecting different types of road damage while providing visual explanations of the model's predictions. The project follows a research-oriented workflow including dataset analysis, model training, explainability, performance evaluation, and result visualization.
+
+**Current Status:** 🚧 In Progress
