@@ -1,1 +1,22 @@
+# Research Log
 
+---
+
+## Day 1
+
+Project selected:
+Explainable Road Damage Detection using YOLOv8 and Grad-CAM
+
+Objectives:
+
+- Learn object detection
+- Learn explainable AI
+- Build a research-quality computer vision project
+- Create a portfolio suitable for graduate school applications
+
+Dataset:
+RDD2022
+
+Status:
+Dataset downloading.
+Repository initialized.
