@@ -28,3 +28,20 @@ YOLOv8 successfully detected road objects using the pretrained model.
 ### Next Goal
 
 Find and prepare a suitable road damage dataset.
+
+## Day 2 — 3 July 2026
+
+### Objective
+Prepare the RDD2022 dataset for model development.
+
+### Tasks Completed
+- Downloaded the RDD2022 dataset.
+- Created a structured dataset directory.
+- Extracted the dataset for inspection.
+- Prepared the repository for the data exploration phase.
+
+### Observations
+The dataset download completed successfully. The next step is to inspect the folder structure, annotation format, and class distribution before training.
+
+### Next Goal
+Explore the dataset structure and verify annotation files for YOLOv8 training.
