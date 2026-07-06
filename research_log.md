@@ -56,9 +56,11 @@ Inspect the RDD2022 dataset and verify its readiness for YOLOv8 training.
 - Confirmed the dataset contains train, validation, and test splits.
 - Confirmed each split contains corresponding images and YOLO-format label files.
 - Verified the dataset is already organized for YOLOv8, eliminating the need for annotation conversion.
+- Inspected YOLO annotation files and confirmed that labels follow the normalized YOLO bounding box format (Class ID, X-center, Y-center, Width, Height).
 
 ### Observations
-The dataset is already formatted for YOLO training, allowing the project to proceed directly to dataset exploration and verification.
+- The dataset is already formatted for YOLO training, allowing the project to proceed directly to dataset exploration and verification.
+- Each annotation file contains one row per detected road damage. Bounding boxes are stored as normalized coordinates rather than pixel values, making the annotations resolution-independent.
 
 ### Next Goal
 Inspect sample annotations, visualize bounding boxes, analyze class distribution, and prepare the dataset configuration file (`data.yaml`) for model training.
