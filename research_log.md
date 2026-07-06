@@ -45,3 +45,20 @@ The dataset download completed successfully. The next step is to inspect the fol
 
 ### Next Goal
 Explore the dataset structure and verify annotation files for YOLOv8 training.
+
+## Day 3 — 5 July 2026
+
+### Objective
+Inspect the RDD2022 dataset and verify its readiness for YOLOv8 training.
+
+### Tasks Completed
+- Verified the extracted dataset structure.
+- Confirmed the dataset contains train, validation, and test splits.
+- Confirmed each split contains corresponding images and YOLO-format label files.
+- Verified the dataset is already organized for YOLOv8, eliminating the need for annotation conversion.
+
+### Observations
+The dataset is already formatted for YOLO training, allowing the project to proceed directly to dataset exploration and verification.
+
+### Next Goal
+Inspect sample annotations, visualize bounding boxes, analyze class distribution, and prepare the dataset configuration file (`data.yaml`) for model training.
