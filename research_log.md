@@ -64,3 +64,29 @@ Inspect the RDD2022 dataset and verify its readiness for YOLOv8 training.
 
 ### Next Goal
 Inspect sample annotations, visualize bounding boxes, analyze class distribution, and prepare the dataset configuration file (`data.yaml`) for model training.
+
+## Day 4 — 13 July 2026
+
+### Objective
+
+Rebuild the project environment after system failure and re-establish the baseline object detection workflow.
+
+### Tasks Completed
+
+- Recreated the Google Colab environment.
+- Reinstalled the required libraries and dependencies.
+- Loaded the pretrained YOLOv8 Nano model (`yolov8n.pt`).
+- Performed inference on a road image containing a visible pothole.
+- Visualized the prediction results.
+- Reviewed the YOLO annotation format.
+- Documented the baseline experiment in the project notebook and GitHub repository.
+
+### Observations
+
+- The pretrained YOLOv8 Nano model failed to detect the pothole.
+- A tree in the background was incorrectly classified as a **giraffe** with a confidence score of approximately **0.32**.
+- This result confirms that the pretrained model, which is trained on the COCO dataset, is not suitable for detecting road damage without domain-specific training.
+
+### Next Goal
+
+Resume work with the RDD2022 dataset and begin preparing the custom training pipeline for YOLOv8.
