@@ -8,15 +8,31 @@ The objective is to develop an interpretable computer vision system capable of d
 
 ## Baseline Experiment
 
-The pretrained YOLOv8 Nano model (`yolov8n.pt`) was tested on an image containing a pothole.
+Before training a custom model, the pretrained **YOLOv8 Nano** model (`yolov8n.pt`) was evaluated on a road image containing a visible pothole.
+
+### Input Image
+
+![Original Road Image](images/original_road.jpg)
+
+### Prediction Result
+
+![Baseline Prediction](images/baseline_prediction.jpg)
 
 ### Observations
 
-- Failed to detect the pothole.
-- Incorrectly classified a tree as a giraffe (confidence ≈ 0.32).
-- Demonstrates that pretrained COCO models are not suitable for road damage detection without fine-tuning.
+- The pretrained model failed to detect the pothole.
+- A tree in the background was incorrectly classified as a **giraffe** with a confidence score of approximately **0.32**.
+- No road damage was detected.
 
-This baseline experiment motivates the use of a dedicated road damage dataset (RDD2022) for custom training.
+### Discussion
+
+The pretrained YOLOv8 Nano model is trained on the COCO dataset, which contains 80 everyday object classes such as people, vehicles, and animals. However, it does not include road damage categories such as potholes or cracks.
+
+As a result, the model was unable to recognize the pothole and instead produced a false positive.
+
+### Conclusion
+
+This baseline experiment demonstrates the limitations of a generic object detection model for road damage detection and motivates the need to train YOLOv8 on a dedicated Road Damage Dataset (RDD2022).
 
 | Experiment      | Model                  | Result                                                               |
 | --------------- | ---------------------- | -------------------------------------------------------------------- |
