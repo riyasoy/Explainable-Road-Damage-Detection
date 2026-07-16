@@ -1,44 +1,247 @@
 # Explainable Road Damage Detection using YOLOv8 and Grad-CAM
 
-## Overview
+> A Computer Vision project demonstrating explainable AI for intelligent transportation systems using YOLOv8 object detection and Grad-CAM visualization.
 
-This project investigates automated road damage detection using the YOLOv8 object detection framework together with Explainable AI (XAI) techniques, specifically Grad-CAM.
+---
 
-The objective is to develop an interpretable computer vision system capable of detecting different types of road damage while providing visual explanations of the model's predictions. The project follows a research-oriented workflow including dataset analysis, model training, explainability, performance evaluation, and result visualization.
+# Project Overview
 
-## Baseline Experiment
+Road damage detection plays an important role in intelligent transportation systems, autonomous driving, and smart city infrastructure. Manual road inspection is expensive, time-consuming, and often inconsistent.
 
-Before training a custom model, the pretrained **YOLOv8 Nano** model (`yolov8n.pt`) was evaluated on a road image containing a visible pothole.
+This project develops an explainable deep learning pipeline capable of detecting multiple categories of road damage while providing visual explanations of the model's decision-making process using Explainable AI (XAI).
 
-### Input Image
+Unlike traditional object detection projects that only produce bounding boxes, this work investigates **why** the neural network predicts a particular road defect by integrating **Grad-CAM**.
 
-![Original Road Image](images/original_road.jpg)
+---
 
-### Prediction Result
+# Objectives
 
-![Baseline Prediction](images/baseline_prediction.jpg)
+- Detect road damage automatically using YOLOv8
+- Train a custom detector on a road damage dataset
+- Evaluate detection performance using standard object detection metrics
+- Interpret model predictions using Grad-CAM
+- Demonstrate how Explainable AI improves trust in computer vision systems
 
-### Observations
+---
 
-- The pretrained model failed to detect the pothole.
-- A tree in the background was incorrectly classified as a **giraffe** with a confidence score of approximately **0.32**.
-- No road damage was detected.
+# Dataset
 
-### Discussion
+Dataset:
 
-The pretrained YOLOv8 Nano model is trained on the COCO dataset, which contains 80 everyday object classes such as people, vehicles, and animals. However, it does not include road damage categories such as potholes or cracks.
+**Road Damage Dataset: Potholes, Cracks and Manholes**
 
-As a result, the model was unable to recognize the pothole and instead produced a false positive.
+Classes:
 
-### Conclusion
+- Crack
+- Manhole
+- Pothole
 
-This baseline experiment demonstrates the limitations of a generic object detection model for road damage detection and motivates the need to train YOLOv8 on a dedicated Road Damage Dataset (RDD2022).
+Dataset Statistics
 
-| Experiment      | Model                  | Result                                                               |
-| --------------- | ---------------------- | -------------------------------------------------------------------- |
-| Baseline        | Pretrained YOLOv8 Nano | ❌ Missed pothole; false positive (tree → giraffe, confidence ≈ 0.32) |
-| Custom Training | YOLOv8 + RDD2022       | ⏳ In Progress                                                        |
-| Explainability  | YOLOv8 + Grad-CAM      | ⏳ Planned                                                            |
+| Split | Images |
+|--------|-------:|
+| Train | 1406 |
+| Validation | 301 |
+| Test | 302 |
+| **Total** | **2009** |
 
+---
 
-**Current Status:** 🚧 In Progress
+# Model
+
+Model:
+
+YOLOv8 Nano (`yolov8n`)
+
+Reasons for selecting YOLOv8 Nano:
+
+- Fast inference
+- Lightweight architecture
+- Suitable for real-time applications
+- Excellent baseline for edge deployment
+- Easy integration with Explainable AI techniques
+
+---
+
+# Methodology
+
+The workflow followed in this project:
+
+```
+Road Damage Dataset
+        │
+        ▼
+Dataset Preparation
+        │
+        ▼
+Train / Validation / Test Split
+        │
+        ▼
+YOLOv8 Training
+        │
+        ▼
+Performance Evaluation
+        │
+        ▼
+Road Damage Detection
+        │
+        ▼
+Grad-CAM Visualization
+        │
+        ▼
+Model Interpretation
+```
+
+---
+
+# Baseline Experiment
+
+Before training the custom detector, the pretrained YOLOv8 Nano model was tested on a road image.
+
+### Observation
+
+The pretrained COCO model failed to detect potholes because road damage classes are not included in the COCO dataset.
+
+Instead, it incorrectly classified a background tree as a giraffe.
+
+This demonstrates why domain-specific training is necessary.
+
+---
+
+# Training Configuration
+
+| Parameter | Value |
+|-----------|------:|
+| Model | YOLOv8 Nano |
+| Epochs | 30 |
+| Image Size | 640 × 640 |
+| Batch Size | 16 |
+| Optimizer | Auto |
+| Device | Tesla T4 GPU |
+
+---
+
+# Results
+
+Validation Results
+
+| Metric | Score |
+|---------|------:|
+| Precision | **0.497** |
+| Recall | **0.475** |
+| mAP@0.5 | **0.442** |
+| mAP@0.5:0.95 | **0.193** |
+
+Per-Class Performance
+
+| Class | mAP@0.5 |
+|--------|---------:|
+| Crack | 0.360 |
+| Manhole | 0.309 |
+| Pothole | 0.658 |
+
+The detector achieved the strongest performance on pothole detection while crack and manhole detection remain challenging because of greater visual variability.
+
+---
+
+# Explainable AI using Grad-CAM
+
+Most object detection systems only provide predictions.
+
+Grad-CAM allows us to visualize **which image regions influenced the model's decision**.
+
+Benefits:
+
+- Improves model transparency
+- Increases user trust
+- Helps identify false detections
+- Useful for model debugging
+- Supports responsible AI development
+
+---
+
+# Repository Structure
+
+```
+Explainable-Road-Damage-Detection/
+
+├── notebooks/
+│   └── RoadDamageDetection.ipynb
+│
+├── images/
+│   ├── original_road.jpg
+│   ├── baseline_prediction.jpg
+│   ├── confusion_matrix.png
+│   ├── results.png
+│   └── gradcam_example.png
+│
+├── results/
+│   ├── weights/
+│   ├── predictions/
+│   └── evaluation/
+│
+├── README.md
+├── LICENSE
+└── .gitignore
+```
+
+---
+
+# Future Improvements
+
+- Train larger YOLOv8 models
+- Hyperparameter optimization
+- Data augmentation
+- Additional road damage categories
+- Real-time video inference
+- Edge deployment on embedded devices
+- Comparative analysis with Faster R-CNN and YOLO11
+
+---
+
+# Technologies Used
+
+- Python
+- PyTorch
+- Ultralytics YOLOv8
+- OpenCV
+- NumPy
+- Matplotlib
+- Google Colab
+- Grad-CAM
+
+---
+
+# Applications
+
+- Smart Cities
+- Intelligent Transportation Systems
+- Autonomous Vehicles
+- Infrastructure Monitoring
+- Road Maintenance
+- AI-assisted Inspection Systems
+
+---
+
+# Author
+
+**Riya Soy**
+
+Mechatronics Engineer
+
+Research Interests
+
+- Computer Vision
+- Explainable AI
+- Intelligent Infrastructure
+- Edge AI
+- AI for Public Systems
+
+---
+
+# Acknowledgements
+
+- Ultralytics YOLOv8
+- Road Damage Dataset authors
+- PyTorch
+- OpenCV
