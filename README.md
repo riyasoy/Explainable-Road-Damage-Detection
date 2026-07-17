@@ -68,6 +68,43 @@ The model achieved its strongest performance on pothole detection, while crack a
 ### Confusion Matrix
 
 ![Confusion Matrix](figures/confusion_matrix.png)
+
+## Results and Discussion
+
+The custom-trained YOLOv8 Nano model successfully learned to detect three categories of road damage: **cracks**, **manholes**, and **potholes**.
+
+Among the three classes, **potholes achieved the highest detection performance**, indicating that they possess more distinctive visual characteristics compared to cracks and manholes. Cracks often appear as thin, irregular patterns with varying illumination, while manholes can be partially occluded or visually similar to the surrounding road surface.
+
+The overall validation performance reached:
+
+- Precision: **0.497**
+- Recall: **0.475**
+- mAP@0.50: **0.442**
+- mAP@0.50:0.95: **0.193**
+
+The confusion matrix further indicates that several objects were missed by the detector, particularly for crack and manhole classes. This suggests that additional training data, stronger data augmentation, or a larger YOLO model (such as YOLOv8s or YOLOv8m) could further improve detection performance.
+
+Despite these limitations, the trained model demonstrates the feasibility of applying lightweight object detection models for automated road damage inspection.
+
+## Limitations
+
+The current implementation has several limitations:
+
+- The model was trained for only **30 epochs**.
+- YOLOv8 Nano prioritizes speed over maximum accuracy.
+- The dataset contains visual variations in lighting, road texture, and object scale.
+- Small cracks remain difficult to detect accurately.
+- Explainability analysis using Grad-CAM has not yet been fully integrated into the inference pipeline.
+
+## Future Work
+
+Future improvements include:
+
+- Integrating Grad-CAM visualizations for model interpretability.
+- Training larger YOLOv8 variants for improved accuracy.
+- Hyperparameter tuning and data augmentation.
+- Evaluating additional road damage datasets.
+- Deploying the trained model for real-time road inspection applications.
 ---
 
 # Objectives
