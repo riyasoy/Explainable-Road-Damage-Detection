@@ -14,20 +14,19 @@ Unlike traditional object detection projects that only produce bounding boxes, t
 
 ## Project Structure
 
-```
+```text
 Explainable-Road-Damage-Detection/
 │
-├── dataset/
-│
-├── project_results/
-│   ├── figures/
-│   └── predictions/
-│
-├── notebooks/
-│
+├── data/                 # Dataset configuration
+├── figures/              # Training curves and evaluation plots
+├── images/               # Sample input and prediction images
+├── models/               # Trained YOLOv8 weights
+├── notebooks/            # Google Colab notebooks
+├── outputs/              # Model outputs and predictions
+├── reports/              # Project documentation
+├── scripts/              # Helper scripts
 ├── README.md
-│
-└── requirements.txt
+└── .gitignore
 ```
 
 The repository contains:
@@ -60,17 +59,15 @@ The model achieved its strongest performance on pothole detection, while crack a
 
 ### Training Metrics
 
-![Training Results](project_results/figures/results.png)
+![Training Results](figures/results.png)
 
 ### Precision–Recall Curve
 
-![PR Curve](project_results/figures/BoxPR_curve.png)
+![PR Curve](figures/BoxPR_curve.png)
 
 ### Confusion Matrix
 
-![Confusion Matrix](project_results/figures/confusion_matrix.png)
-
-
+![Confusion Matrix](figures/confusion_matrix.png)
 ---
 
 # Objectives
