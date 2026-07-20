@@ -1,6 +1,6 @@
 # Explainable Road Damage Detection using YOLOv8 and Grad-CAM
 
-> A Computer Vision project demonstrating explainable AI for intelligent transportation systems using YOLOv8 object detection and Grad-CAM visualization.
+> A Computer Vision project for automated road damage detection using YOLOv8 Nano, with planned Grad-CAM integration for Explainable AI.
 
 ---
 
@@ -8,9 +8,18 @@
 
 Road damage detection plays an important role in intelligent transportation systems, autonomous driving, and smart city infrastructure. Manual road inspection is expensive, time-consuming, and often inconsistent.
 
-This project develops an explainable deep learning pipeline capable of detecting multiple categories of road damage while providing visual explanations of the model's decision-making process using Explainable AI (XAI).
+This project develops a lightweight deep learning pipeline capable of detecting multiple categories of road damage using YOLOv8 Nano while laying the foundation for future integration of Explainable Artificial Intelligence (XAI) through Grad-CAM.
 
-Unlike traditional object detection projects that only produce bounding boxes, this work investigates **why** the neural network predicts a particular road defect by integrating **Grad-CAM**.
+Unlike traditional object detection projects that only produce bounding boxes, this project is designed to be extended with Grad-CAM so that future versions can visualize why the neural network predicts a particular road defect.
+
+---
+
+# 📄 Technical Report
+
+A detailed technical report describing the project motivation, methodology, experimental setup, evaluation, discussion, limitations, and future work is available below.
+
+- 📘 **Markdown Report:** [technical_report.md](reports/technical_report.md)
+- 📄 **PDF Report:** [technical_report.pdf](reports/technical_report.pdf)
 
 ---
 
@@ -19,7 +28,7 @@ Unlike traditional object detection projects that only produce bounding boxes, t
 - Detect road damage automatically using YOLOv8.
 - Train a custom object detector on a road damage dataset.
 - Evaluate performance using standard object detection metrics.
-- Interpret predictions using Grad-CAM.
+- Integrate Grad-CAM for future interpretation of model predictions.
 - Demonstrate how Explainable AI improves transparency and trust in computer vision.
 
 ---
