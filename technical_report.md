@@ -1,9 +1,12 @@
-# Technical Report
+# Road Damage Detection using YOLOv8 Nano: Towards Explainable Infrastructure Monitoring
 
-## Road Damage Detection using YOLOv8 Nano: Towards Explainable Infrastructure Monitoring
+## Technical Report
+
 **Author:** Riya Soy
 
 **Project Type:** Mini Research Project
+
+**Date:** July 2026
 
 **Keywords:** Computer Vision, Object Detection, YOLOv8, Explainable AI, Grad-CAM, Road Damage Detection, Intelligent Transportation Systems
 
