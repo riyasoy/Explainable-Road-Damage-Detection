@@ -1,6 +1,6 @@
 # Technical Report
 
-## Explainable Road Damage Detection using YOLOv8 and Grad-CAM
+## Road Damage Detection using YOLOv8 Nano: Towards Explainable Infrastructure Monitoring
 **Author:** Riya Soy
 
 **Project Type:** Mini Research Project
@@ -11,9 +11,9 @@
 
 Road damage detection is an important application of computer vision for intelligent transportation systems, enabling faster and more consistent infrastructure inspection than traditional manual surveys. However, conventional object detection models often operate as black-box systems, making it difficult to understand the reasoning behind their predictions.
 
-This project investigates an explainable deep learning approach for automated road damage detection using the YOLOv8 Nano object detection model. A custom dataset containing three road damage categories—cracks, potholes, and manholes—was used to train and evaluate the detector. The trained model achieved a precision of 0.497, recall of 0.475, mAP@0.50 of 0.442, and mAP@0.50:0.95 of 0.193 after 30 training epochs. Among the evaluated classes, potholes achieved the strongest detection performance, while cracks and manholes remained more challenging because of their greater visual variability and class imbalance.
+This project investigates a deep learning approach for automated road damage detection using the YOLOv8 Nano object detection model. A custom dataset containing three road damage categories—cracks, potholes, and manholes—was used to train and evaluate the detector. The trained model achieved a precision of 0.497, recall of 0.475, mAP@0.50 of 0.442, and mAP@0.50:0.95 of 0.193 after 30 training epochs. Among the evaluated classes, potholes achieved the strongest detection performance, while cracks and manholes remained more challenging because of their greater visual variability and class imbalance.
 
-Beyond object detection, this project aims to improve model interpretability by integrating Gradient-weighted Class Activation Mapping (Grad-CAM), allowing visual inspection of the image regions influencing the model's predictions. Although the Grad-CAM implementation is planned as ongoing work, the project establishes a foundation for combining accurate object detection with explainable artificial intelligence techniques for intelligent infrastructure monitoring.
+In addition to object detection, this project proposes the integration of Gradient-weighted Class Activation Mapping (Grad-CAM) to improve model interpretability by highlighting the image regions that influence detection decisions. Although Grad-CAM has not yet been integrated into the current implementation, this work establishes a foundation for combining efficient object detection with explainable artificial intelligence techniques for intelligent infrastructure monitoring.
 
 # 1. Introduction
 
@@ -29,13 +29,15 @@ The objective of this project is to develop an explainable road damage detection
 
 ## 2. Related Work
 
-Recent advances in deep learning have significantly improved the performance of automated road damage detection systems. Object detection architectures based on the YOLO (You Only Look Once) family have become widely adopted because they provide an effective balance between detection accuracy and inference speed, making them suitable for real-time infrastructure monitoring applications.
+Automated road damage detection has become an active research area within intelligent transportation systems due to its potential to reduce the cost and time associated with manual road inspections. Recent advances in deep learning-based object detection, particularly the YOLO family of models, have significantly improved the accuracy and efficiency of pavement defect detection (Guo & Zhang, 2022; Sami et al., 2023).
 
-Several publicly available road damage datasets have accelerated research in this domain by enabling the development and comparison of deep learning models under standardized evaluation settings. These datasets typically include multiple categories of road defects such as cracks, potholes, and surface deterioration captured under varying environmental conditions.
+Guo and Zhang (2022) proposed an improved YOLOv5-based approach for road damage detection, demonstrating enhanced localization performance for multiple pavement defects. Subsequent studies further refined YOLO architectures by introducing lightweight network modifications, attention mechanisms, and feature fusion techniques to improve detection accuracy while maintaining real-time inference capability (Miao et al., 2023; Lightweight Model for Pavement Defect Detection Based on Improved YOLOv7, 2023; RDD-YOLO, 2024).
 
-Although modern object detectors achieve high detection performance, most operate as black-box models, providing little insight into the reasoning behind their predictions. This limitation has encouraged growing interest in Explainable Artificial Intelligence (XAI) techniques, including Gradient-weighted Class Activation Mapping (Grad-CAM), which can highlight image regions influencing model decisions.
+Recent research has also focused on comparing successive generations of YOLO models and evaluating their suitability for practical deployment in intelligent transportation systems. These studies consistently report that lightweight object detectors provide an effective balance between computational efficiency and detection performance, making them attractive candidates for edge deployment and real-time infrastructure monitoring (Optimizing YOLO Architectures, 2024; Towards Real-world Deployment of Deep Learning Solutions for Road Damage Detection, 2024).
 
-In the next revision of this report, this section will be expanded with recent peer-reviewed literature discussing YOLO-based road damage detection methods, explainability techniques, and intelligent transportation applications.
+Although modern object detection models achieve promising detection accuracy, they generally operate as black-box systems, providing limited insight into the reasoning behind their predictions. This limitation has motivated growing interest in Explainable Artificial Intelligence (XAI). Gradient-weighted Class Activation Mapping (Grad-CAM) has emerged as one of the most widely adopted explainability techniques for visualizing the image regions that influence deep learning predictions. Recent studies have demonstrated that Grad-CAM can be successfully applied to object detection models, including YOLO-based detectors, to improve model transparency and facilitate error analysis (Kirchknopf et al., 2022; Cheng et al., 2025).
+
+Motivated by these developments, this project proposes the integration of Grad-CAM-based explainability into a lightweight YOLOv8 Nano road damage detection framework. While the current work primarily focuses on developing and evaluating the detection model, future work will integrate Grad-CAM into the inference pipeline to provide interpretable visual explanations of model predictions.
 
 ## 3. Dataset
 
@@ -107,7 +109,7 @@ The final validation metrics obtained from the trained model are summarized in *
 | mAP@0.50 | 0.442 |
 | mAP@0.50:0.95 | 0.193 |
 
-These results indicate that the model achieved moderate detection performance despite using the lightweight YOLOv8 Nano architecture and a relatively short training schedule.
+These results demonstrate that the lightweight YOLOv8 Nano model was able to learn meaningful representations of road damage despite its limited model capacity and a relatively short training schedule of 30 epochs.
 
 ---
 
@@ -139,7 +141,7 @@ Among all classes, potholes achieved the highest detection accuracy. Their large
 ### 6.3 Training Behaviour
 
 The training process showed gradual improvements in localization and classification performance over successive epochs. Precision–Recall curves, F1-score curves, and confusion matrices indicate that the detector learned meaningful representations of road damage while still exhibiting confusion between visually similar classes.
-The training visualizations further illustrate the learning dynamics of the detector, including precision–recall behaviour and class-wise confusion during validation.
+The training visualizations provide additional insight into the detector's learning behaviour, illustrating the evolution of precision, recall, and class-wise confusion throughout the training process.
 
 ---
 
@@ -148,8 +150,6 @@ The training visualizations further illustrate the learning dynamics of the dete
 ![Confusion Matrix](figures/confusion_matrix.png)
 
 *Confusion matrix showing class-wise prediction performance on the validation dataset.*
-
-Training visualizations included in the GitHub repository further illustrate the learning dynamics of the model, including precision, recall, F1-score progression, and confusion matrix analysis.
 
 ### 6.4 Prediction Examples
 
@@ -161,6 +161,8 @@ The results demonstrate that YOLOv8 Nano can effectively detect road damage whil
 
 Among the three road damage categories, potholes achieved the highest overall mAP@0.50 score (0.658), indicating stronger average detection performance than cracks and manholes. However, qualitative analysis of prediction examples revealed that potholes were still frequently confused with manholes or partially detected as cracks in challenging scenes. Water-filled potholes, overlapping defects, and variations in road texture sometimes caused the detector to assign incorrect class labels despite successfully localizing the damaged region. These observations suggest that although potholes were the best-performing class overall, significant classification errors remain, highlighting opportunities for further improvement through additional training data, longer training schedules, and model refinement.
 
+These observations highlight the importance of evaluating both quantitative performance metrics and qualitative prediction examples when assessing object detection systems for real-world infrastructure monitoring.
+
 The analysis of representative prediction images revealed both successful detections and failure cases. Successful predictions indicate that the model learned useful spatial features for identifying road damage. However, several failure cases demonstrate that complex backgrounds, lighting variations, partial occlusions, and subtle surface defects continue to challenge the detector.
 
 An important objective of this project extends beyond achieving high detection accuracy. The planned integration of Gradient-weighted Class Activation Mapping (Grad-CAM) aims to improve the interpretability of the model by highlighting image regions that contribute most strongly to each prediction. Such explainability is particularly valuable for intelligent transportation systems, where engineers and decision-makers benefit from understanding not only what the model predicts but also why those predictions are made.
@@ -171,7 +173,7 @@ Overall, the findings suggest that lightweight object detection models such as Y
 
 Although the proposed approach demonstrates the feasibility of lightweight road damage detection using YOLOv8 Nano, several limitations remain.
 
-The model was trained for only 30 epochs, which may not have been sufficient for complete convergence. In addition, the lightweight YOLOv8 Nano architecture prioritizes computational efficiency over maximum detection accuracy, resulting in reduced performance for visually complex classes.
+The model was trained for only 30 epochs, which may not have been sufficient for complete convergence. Furthermore, only the YOLOv8 Nano variant was evaluated in this study; comparisons with larger YOLOv8 models were beyond the scope of the current project. In addition, the lightweight YOLOv8 Nano architecture prioritizes computational efficiency over maximum detection accuracy, resulting in reduced performance for visually complex classes.
 
 The dataset also presents challenges including varying lighting conditions, road textures, object scales, partial occlusions, and class imbalance. These factors contribute to missed detections and incorrect class predictions, particularly for cracks and manholes. Furthermore, explainability using Grad-CAM has not yet been fully integrated into the inference pipeline and therefore has not been quantitatively evaluated in this study.
 
@@ -195,4 +197,20 @@ Overall, this study demonstrates that lightweight object detection models can se
 
 ## References
 
-> References will be added after reviewing recent literature on road damage detection, YOLO-based object detection, and Explainable Artificial Intelligence (XAI).
+1. Guo, G., & Zhang, Z. (2022). *Road damage detection algorithm for improved YOLOv5*. Scientific Reports.
+
+2. Sami, A. A., Sakib, S., Deb, K., & Sarker, I. H. (2023). *Improved YOLOv5-based real-time road pavement damage detection in road infrastructure management*. Algorithms.
+
+3. Miao, R., Xianfeng, Z., Xiao, C., Bo, Z., & Ziyuan, F. (2023). *YOLOv5s-M: A deep learning network model for road pavement damage detection from urban street-view imagery*. International Journal of Applied Earth Observation and Geoinformation.
+
+4. *Lightweight Model for Pavement Defect Detection Based on Improved YOLOv7*. (2023).
+
+5. *RDD-YOLO: Road Damage Detection Algorithm Based on Improved YOLOv8*. (2024). Applied Sciences.
+
+6. *Optimizing YOLO Architectures for Optimal Road Damage Detection and Classification: A Comparative Study from YOLOv7 to YOLOv10*. (2024). IEEE BigData.
+
+7. *Towards Real-world Deployment of Deep Learning Solutions for Road Damage Detection*. (2024). IEEE BigData.
+
+8. Kirchknopf, A., Slijepcevic, D., Wunderlich, I., Breiter, M., Traxler, J., & Zeppelzauer, M. (2022). *Explaining YOLO: Leveraging Grad-CAM to Explain Object Detections*.
+
+9. Cheng, Z., Wu, Y., Li, Y., Cai, L., & Ihnaini, B. (2025). *A Comprehensive Review of Explainable Artificial Intelligence (XAI) in Computer Vision*. Sensors.
