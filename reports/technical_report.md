@@ -118,7 +118,7 @@ These results demonstrate that the lightweight YOLOv8 Nano model was able to lea
 
 ### Figure 1. Training Performance
 
-![Training Results](figures/results.png)
+![Training Results](../figures/results.png)
 
 *Training metrics over 30 epochs showing the convergence behavior of the YOLOv8 Nano model.*
 
@@ -137,7 +137,7 @@ Among all classes, potholes achieved the highest detection accuracy. Their large
 
 ### Figure 2. Precision–Recall Curve
 
-![Precision–Recall Curve](figures/BoxPR_curve.png)
+![Precision–Recall Curve](../figures/BoxPR_curve.png)
 
 *Precision–Recall curve illustrating the trade-off between precision and recall across confidence thresholds.*
 
@@ -150,7 +150,7 @@ The training visualizations provide additional insight into the detector's learn
 
 ### Figure 3. Confusion Matrix
 
-![Confusion Matrix](figures/confusion_matrix.png)
+![Confusion Matrix](../figures/confusion_matrix.png)
 
 *Confusion matrix showing class-wise prediction performance on the validation dataset.*
 
