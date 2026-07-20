@@ -1,5 +1,6 @@
-# Explainable Road Damage Detection using YOLOv8 and Grad-CAM
+# Technical Report
 
+## Explainable Road Damage Detection using YOLOv8 and Grad-CAM
 **Author:** Riya Soy
 
 **Project Type:** Mini Research Project
@@ -140,8 +141,30 @@ Overall, the findings suggest that lightweight object detection models such as Y
 
 ## 8. Limitations
 
+Although the proposed approach demonstrates the feasibility of lightweight road damage detection using YOLOv8 Nano, several limitations remain.
+
+The model was trained for only 30 epochs, which may not have been sufficient for complete convergence. In addition, the lightweight YOLOv8 Nano architecture prioritizes computational efficiency over maximum detection accuracy, resulting in reduced performance for visually complex classes.
+
+The dataset also presents challenges including varying lighting conditions, road textures, object scales, partial occlusions, and class imbalance. These factors contribute to missed detections and incorrect class predictions, particularly for cracks and manholes. Furthermore, explainability using Grad-CAM has not yet been fully integrated into the inference pipeline and therefore has not been quantitatively evaluated in this study.
+
+These limitations provide opportunities for future improvements in both model performance and interpretability.
+
 ## 9. Future Work
+
+Several extensions can further improve this project.
+
+Future work will focus on integrating Grad-CAM to visualize the regions influencing model predictions and to better understand both successful detections and failure cases. Additional experiments using larger YOLOv8 variants, such as YOLOv8s and YOLOv8m, will be conducted to compare accuracy and computational efficiency.
+
+Further improvements include increasing the number of training epochs, applying stronger data augmentation techniques, evaluating additional road damage datasets, and performing comparative experiments with other object detection architectures. In the longer term, the system could be extended for real-time road inspection using edge devices or intelligent transportation platforms.
 
 ## 10. Conclusion
 
+This project presented a lightweight framework for automated road damage detection using the YOLOv8 Nano object detection model. The trained detector successfully identified three categories of road damage—cracks, potholes, and manholes—and achieved moderate detection performance on a custom road damage dataset.
+
+Beyond model development, the project emphasizes the importance of explainability in computer vision applications. By incorporating Grad-CAM in future work, the system aims to provide greater transparency into the decision-making process of deep learning models used for infrastructure monitoring.
+
+Overall, this study demonstrates that lightweight object detection models can serve as a practical foundation for intelligent road inspection systems while highlighting the importance of continued improvements in accuracy, robustness, and model interpretability.
+
 ## References
+
+> References will be added after reviewing recent literature on road damage detection, YOLO-based object detection, and Explainable Artificial Intelligence (XAI).
