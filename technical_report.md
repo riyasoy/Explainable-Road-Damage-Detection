@@ -47,6 +47,8 @@ The experiments in this project were conducted using a road damage dataset conta
 
 The dataset consists of a total of 2,009 annotated images divided into training, validation, and testing subsets.
 
+**Table 1. Dataset Statistics**
+
 | Dataset Split | Number of Images |
 |---------------|-----------------:|
 | Training | 1406 |
@@ -94,7 +96,9 @@ The trained YOLOv8 Nano model successfully learned to detect three categories of
 
 ### 6.1 Overall Detection Performance
 
-The final validation metrics obtained from the trained model are summarized in Table 2.
+The final validation metrics obtained from the trained model are summarized in **Table 2**.
+
+**Table 2. Overall Validation Performance**
 
 | Metric | Value |
 |---------|------:|
@@ -105,8 +109,15 @@ The final validation metrics obtained from the trained model are summarized in T
 
 These results indicate that the model achieved moderate detection performance despite using the lightweight YOLOv8 Nano architecture and a relatively short training schedule.
 
-### 6.2 Class-wise Performance
+---
 
+### Figure 1. Training Performance
+
+![Training Results](figures/results.png)
+
+*Training metrics over 30 epochs showing the convergence behavior of the YOLOv8 Nano model.*
+
+### 6.2 Class-wise Performance
 Performance varied across the three road damage categories.
 
 | Class | mAP@0.50 |
@@ -117,9 +128,26 @@ Performance varied across the three road damage categories.
 
 Among all classes, potholes achieved the highest detection accuracy. Their larger size and more distinctive visual appearance likely contributed to improved recognition performance. In contrast, cracks and manholes proved more challenging because they often exhibit irregular shapes, varying illumination conditions, and visual similarities to surrounding road surfaces.
 
+---
+
+### Figure 2. Precision–Recall Curve
+
+![Precision–Recall Curve](figures/BoxPR_curve.png)
+
+*Precision–Recall curve illustrating the trade-off between precision and recall across confidence thresholds.*
+
 ### 6.3 Training Behaviour
 
 The training process showed gradual improvements in localization and classification performance over successive epochs. Precision–Recall curves, F1-score curves, and confusion matrices indicate that the detector learned meaningful representations of road damage while still exhibiting confusion between visually similar classes.
+The training visualizations further illustrate the learning dynamics of the detector, including precision–recall behaviour and class-wise confusion during validation.
+
+---
+
+### Figure 3. Confusion Matrix
+
+![Confusion Matrix](figures/confusion_matrix.png)
+
+*Confusion matrix showing class-wise prediction performance on the validation dataset.*
 
 Training visualizations included in the GitHub repository further illustrate the learning dynamics of the model, including precision, recall, F1-score progression, and confusion matrix analysis.
 
