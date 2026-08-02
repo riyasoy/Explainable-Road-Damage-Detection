@@ -1,60 +1,76 @@
-# Explainable Road Damage Detection using YOLOv8 and Grad-CAM
+# Interpretable Road Damage Detection for Intelligent Transportation Systems using YOLOv8 Nano and EigenCAM
 
-> A Computer Vision project for automated road damage detection using YOLOv8 Nano, with planned Grad-CAM integration for Explainable AI.
-
----
-
-# Project Overview
-
-Road damage detection plays an important role in intelligent transportation systems, autonomous driving, and smart city infrastructure. Manual road inspection is expensive, time-consuming, and often inconsistent.
-
-This project develops a lightweight deep learning pipeline capable of detecting multiple categories of road damage using YOLOv8 Nano while laying the foundation for future integration of Explainable Artificial Intelligence (XAI) through Grad-CAM.
-
-Unlike traditional object detection projects that only produce bounding boxes, this project is designed to be extended with Grad-CAM so that future versions can visualize why the neural network predicts a particular road defect.
+> A lightweight computer vision pipeline for automated road damage detection using **YOLOv8 Nano**, enhanced with **EigenCAM-based explainability** to improve the transparency and interpretability of object detection models.
 
 ---
 
-# 📄 Technical Report
+## Project Overview
 
-A detailed technical report describing the project motivation, methodology, experimental setup, evaluation, discussion, limitations, and future work is available below.
+Road surface deterioration—including **potholes, cracks, and damaged pavement**—poses significant challenges for transportation safety, infrastructure maintenance, and intelligent transportation systems (ITS). Traditional road inspection methods rely heavily on manual surveys, making them time-consuming, expensive, and difficult to scale.
 
-- 📘 **Markdown Report:** [technical_report.md](reports/technical_report.md)
-- 📄 **PDF Report:** [technical_report.pdf](reports/technical_report.pdf)
+This project presents an **interpretable computer vision pipeline** for automated road damage detection using **YOLOv8 Nano**, a lightweight real-time object detector. In addition to object detection, the project integrates **EigenCAM**, a feature-based explainability technique that highlights the image regions contributing most strongly to the model's learned representations.
 
----
-
-# Objectives
-
-- Detect road damage automatically using YOLOv8.
-- Train a custom object detector on a road damage dataset.
-- Evaluate performance using standard object detection metrics.
-- Integrate Grad-CAM for future interpretation of model predictions.
-- Demonstrate how Explainable AI improves transparency and trust in computer vision.
+Unlike conventional object detection pipelines that only produce bounding-box predictions, this project demonstrates how explainability can complement deep learning models by providing qualitative insight into their decision-making process. The resulting workflow combines efficient road damage detection with transparent visual interpretation, making it suitable as a foundation for future research in **Explainable Artificial Intelligence (XAI)** and intelligent infrastructure monitoring.
 
 ---
 
-# Project Structure
+## Technical Report
+
+A detailed technical report accompanies this project and documents the complete development process, including the project motivation, methodology, experimental setup, model training, evaluation, EigenCAM explainability analysis, discussion, limitations, and future research directions.
+
+- 📘 **Markdown Version:** `reports/technical_report.md`
+- 📄 **PDF Version:** `reports/technical_report.pdf`
+  
+---
+
+## Project Objectives
+
+The primary objectives of this project are:
+
+- Develop a lightweight road damage detector using **YOLOv8 Nano**.
+- Detect three categories of road damage: **cracks, manholes, and potholes**.
+- Evaluate the detector using standard object detection metrics.
+- Improve model interpretability through **EigenCAM-based explainability**.
+- Demonstrate how explainability techniques can complement object detection by providing qualitative insight into learned feature representations.
+- Establish a reproducible foundation for future research in Explainable AI (XAI) for intelligent infrastructure monitoring.
+
+---
+
+## Repository Structure
 
 ```text
-Explainable-Road-Damage-Detection/
+Interpretable-Road-Damage-Detection/
 │
-├── data/                 # Dataset configuration
-├── figures/              # Training curves and evaluation plots
-├── images/               # Sample images
-├── models/               # Trained YOLOv8 weights
-├── notebooks/            # Google Colab notebook
-├── outputs/              # Prediction outputs
-├── reports/              # Project documentation
-├── scripts/              # Helper scripts
+├── notebooks/
+│   ├── 01_YOLOv8_Training.ipynb
+│   └── 02_EigenCAM_Explainability_Analysis.ipynb
+│
+├── dataset/
+│   └── data.yaml
+│
+├── models/
+│   └── best.pt
+│
+├── figures/
+│   ├── results.png
+│   ├── confusion_matrix.png
+│   ├── BoxPR_curve.png
+│   ├── original_test_image.png
+│   ├── yolo_detection.png
+│   └── eigencam_selected_image.png
+│
+├── reports/
+│   ├── technical_report.md
+│   └── technical_report.pdf
+│
 ├── README.md
 └── .gitignore
 ```
-
 ---
 
-# Dataset
+## Dataset
 
-**Road Damage Dataset: Potholes, Cracks and Manholes**
+The model was trained using the **Road Damage Dataset: Potholes, Cracks and Manholes**, which provides annotated road-surface images in YOLO object detection format.
 
 ### Classes
 
@@ -71,45 +87,35 @@ Explainable-Road-Damage-Detection/
 | Test | 302 |
 | **Total** | **2009** |
 
+The dataset was automatically downloaded using the Kaggle API and organized into training, validation, and testing splits before model training. 
+
 ---
 
-# Baseline Experiment
+## Baseline Experiment
 
-Before training the custom detector, the pretrained **YOLOv8 Nano** model was evaluated on a road image.
+Before training the custom road damage detector, the pretrained **YOLOv8 Nano** model (trained on the COCO dataset) was evaluated on a representative road image to assess its out-of-the-box performance.
 
-### Input Image
+### Original Image
 
 ![Original Road Image](images/original_road.jpg)
 
-### Prediction
+### Prediction using Pretrained YOLOv8 Nano
 
 ![Baseline Prediction](images/baseline_prediction.jpg)
 
 ### Observation
 
-The pretrained COCO model failed to detect the pothole because road damage classes are not included in the COCO dataset.
+The pretrained YOLOv8 Nano model failed to detect the road pothole because the **COCO dataset does not contain road damage categories** such as potholes, pavement cracks, or manholes.
 
-Instead, it incorrectly classified a background tree as a giraffe.
+Instead, the model incorrectly classified part of the background vegetation as a **giraffe**, illustrating the limitations of applying a generic object detector to a specialized road inspection task.
 
-This experiment demonstrates why domain-specific training is required.
-
----
-
-# Model
-
-**YOLOv8 Nano (yolov8n)**
-
-### Why YOLOv8 Nano?
-
-- Lightweight architecture
-- Fast inference
-- Suitable for edge devices
-- Excellent baseline model
-- Easy integration with Explainable AI
+This baseline experiment motivates the need for **domain-specific training**, where the detector is fine-tuned using annotated road damage images to accurately recognize infrastructure defects.
 
 ---
 
-# Methodology
+## Methodology
+
+The overall workflow adopted in this project is illustrated below.
 
 ```text
 Road Damage Dataset
@@ -118,27 +124,51 @@ Road Damage Dataset
 Dataset Preparation
         │
         ▼
-Train / Validation / Test Split
+YOLOv8 Nano Training
         │
         ▼
-YOLOv8 Training
-        │
-        ▼
-Performance Evaluation
+Model Evaluation
         │
         ▼
 Road Damage Detection
         │
         ▼
-Grad-CAM Visualization
+EigenCAM Explainability Analysis
         │
         ▼
-Model Interpretation
+Feature Layer Comparison
+        │
+        ▼
+Qualitative Interpretation
 ```
+
+The first stage focuses on training a lightweight object detector capable of identifying road damage categories from pavement images. After evaluating the trained model using standard object detection metrics, EigenCAM is applied to visualize the learned feature representations responsible for the detector's predictions.
+
+Finally, multiple intermediate feature layers are compared to identify the layer producing the most informative activation maps, providing qualitative insight into the model's decision-making process.
 
 ---
 
-# Training Configuration
+## Model
+
+This project employs **YOLOv8 Nano (YOLOv8n)** as the object detection backbone.
+
+### Why YOLOv8 Nano?
+
+YOLOv8 Nano was selected because it offers an effective balance between computational efficiency and detection performance. Its lightweight architecture makes it suitable for real-time inference and future deployment on resource-constrained edge devices while maintaining competitive object detection accuracy.
+
+### Model Characteristics
+
+- Lightweight architecture
+- Fast inference speed
+- Real-time object detection
+- Suitable for edge deployment
+- Easily integrated with explainability techniques such as EigenCAM
+
+---
+
+## Training Configuration
+
+The YOLOv8 Nano model was fine-tuned on the custom road damage dataset using the following training configuration.
 
 | Parameter | Value |
 |-----------|------:|
@@ -147,11 +177,13 @@ Model Interpretation
 | Image Size | 640 × 640 |
 | Batch Size | 16 |
 | Optimizer | Auto |
-| Device | Tesla T4 GPU |
+| Device | NVIDIA Tesla T4 GPU |
 
 ---
 
-# Model Performance
+## Model Performance
+
+The trained YOLOv8 Nano model was evaluated on the validation set using standard object detection metrics.
 
 ### Overall Validation Performance
 
@@ -168,13 +200,15 @@ Model Interpretation
 |--------|---------:|
 | Crack | 0.360 |
 | Manhole | 0.309 |
-| Pothole | 0.658 |
+| Pothole | **0.658** |
 
-The model achieved its strongest performance on pothole detection, while crack and manhole detection remain more challenging because of visual variability and limited training samples.
+Among the three road damage categories, **potholes achieved the highest detection performance**, indicating that they possess more distinctive visual characteristics than cracks or manholes. Crack detection remained the most challenging task because of their thin structures, varying orientations, and lower visual contrast with surrounding pavement.
 
 ---
 
-# Training Results
+## Training Results
+
+The figures below summarize the learning behaviour of the trained YOLOv8 Nano detector.
 
 ### Training Metrics
 
@@ -190,60 +224,83 @@ The model achieved its strongest performance on pothole detection, while crack a
 
 ---
 
-# Results and Discussion
+## Results and Discussion
 
-The custom-trained YOLOv8 Nano model successfully learned to detect three categories of road damage: cracks, manholes, and potholes.
+The custom-trained YOLOv8 Nano model successfully learned to detect three categories of road damage: **cracks, manholes, and potholes**.
 
-Among the three classes, potholes achieved the highest detection accuracy because they exhibit more distinctive visual features.
+Evaluation results demonstrate that the detector performs best on potholes, while crack and manhole detection remain more challenging because of their visual variability, smaller object size, and similarity to surrounding pavement textures.
 
-The confusion matrix indicates that several crack and manhole instances were missed, suggesting opportunities for improvement through additional data, stronger augmentation, or larger YOLO variants.
+The confusion matrix further indicates that several crack and manhole instances were either missed or confused with background regions, suggesting opportunities for improvement through larger datasets, additional augmentation strategies, or higher-capacity YOLO architectures.
 
-Overall, the project demonstrates that lightweight object detection models can provide an effective foundation for automated road inspection systems.
-
----
-
-# Explainable AI using Grad-CAM
-
-Traditional object detectors only provide predictions.
-
-Grad-CAM highlights the image regions that most influenced the model's prediction, making deep learning decisions more interpretable.
-
-### Benefits
-
-- Improves model transparency
-- Helps explain predictions
-- Assists in debugging false detections
-- Increases trust in AI systems
-- Supports responsible AI development
-
-> **Status:** Grad-CAM implementation is currently under development and will be integrated into the inference pipeline in a future update.
+Despite these limitations, the project demonstrates that lightweight object detection models can provide an effective foundation for automated road inspection while remaining computationally efficient for future edge deployment.
 
 ---
 
-# Limitations
+## Qualitative Results
 
-- Model trained for only **30 epochs**
-- YOLOv8 Nano prioritizes speed over maximum accuracy
-- Limited dataset size
-- Small cracks remain difficult to detect
-- Grad-CAM integration is still in progress
+To complement the quantitative evaluation, the trained YOLOv8 Nano model was qualitatively analyzed using a representative test image from the road damage dataset.
 
----
+### Original Test Image
 
-# Future Work
-
-- Complete Grad-CAM integration
-- Train larger YOLOv8 variants (YOLOv8s/YOLOv8m)
-- Hyperparameter optimization
-- Advanced data augmentation
-- Evaluate additional road damage datasets
-- Real-time video inference
-- Edge deployment
-- Compare with Faster R-CNN and newer YOLO models
+![Original Test Image](figures/original_test_image.png)
 
 ---
 
-# Technologies Used
+### YOLOv8 Nano Detection
+
+The trained detector successfully localizes the pothole using a bounding box and confidence score.
+
+![YOLO Detection](figures/yolo_detection.png)
+
+---
+
+### EigenCAM Explainability
+
+EigenCAM provides a feature-based visualization of the regions that contribute most strongly to the detector's learned representations.
+
+![EigenCAM Visualization](figures/eigencam_selected_image.png)
+
+---
+
+## Explainability Analysis
+
+Unlike conventional object detectors that only output bounding boxes, EigenCAM provides qualitative insight into the internal feature representations learned by the network.
+
+Multiple intermediate feature layers (**−2**, **−3**, **−4**, and **−5**) were evaluated to identify the most informative activation maps.
+
+Among the evaluated layers, **Layer −2** produced the clearest localization around the road surface while suppressing unrelated background regions. Deeper feature layers generated increasingly sparse activations and occasionally emphasized surrounding structures rather than the damaged pavement itself.
+
+These observations suggest that intermediate feature representations provide a better balance between semantic information and spatial localization for interpreting YOLOv8 Nano predictions.
+
+---
+
+## Limitations
+
+Although the proposed pipeline demonstrates promising performance, several limitations remain:
+
+- The model was trained for only **30 epochs**, leaving room for further optimization.
+- YOLOv8 Nano prioritizes computational efficiency over maximum detection accuracy.
+- Crack detection remains challenging because of thin structures and low visual contrast.
+- The dataset contains a limited number of training samples for certain damage categories.
+- The explainability analysis is qualitative and based on EigenCAM feature visualizations rather than quantitative XAI evaluation metrics.
+
+---
+
+## Future Work
+
+Several directions can further improve this project:
+
+- Train larger YOLOv8 variants (YOLOv8s, YOLOv8m, YOLOv8l).
+- Perform hyperparameter optimization.
+- Increase dataset diversity through additional road damage datasets.
+- Apply advanced augmentation techniques to improve crack detection.
+- Compare EigenCAM with other explainability methods such as Grad-CAM, Grad-CAM++, LayerCAM, and Score-CAM.
+- Evaluate explainability using quantitative XAI metrics.
+- Extend the system to real-time video-based road inspection.
+- Deploy the trained detector on edge devices for intelligent transportation applications.
+---
+
+## Technologies Used
 
 - Python
 - PyTorch
@@ -252,40 +309,46 @@ Grad-CAM highlights the image regions that most influenced the model's predictio
 - NumPy
 - Matplotlib
 - Google Colab
-- Grad-CAM
+- EigenCAM
+- Kaggle API
 
 ---
 
-# Applications
+## Applications
 
-- Smart Cities
-- Intelligent Transportation Systems
-- Autonomous Vehicles
-- Infrastructure Monitoring
+Potential applications of this work include:
+
+- Intelligent Transportation Systems (ITS)
+- Smart City Infrastructure Monitoring
 - Automated Road Inspection
-- AI-assisted Maintenance Systems
+- Pavement Condition Assessment
+- AI-assisted Maintenance Planning
+- Edge AI for Infrastructure Monitoring
 
 ---
 
-# Author
+## Author
 
 **Riya Soy**
 
 Mechatronics Engineer
 
-**Research Interests**
+### Research Interests
 
 - Computer Vision
-- Explainable AI
-- Intelligent Infrastructure
+- Explainable Artificial Intelligence (XAI)
+- Intelligent Infrastructure Systems
 - Edge AI
 - AI Governance
 
 ---
 
-# Acknowledgements
+## Acknowledgements
+
+This project was developed using the following open-source tools and resources:
 
 - Ultralytics YOLOv8
 - PyTorch
 - OpenCV
-- Road Damage Dataset authors
+- EigenCAM (YOLO-V8-CAM)
+- Kaggle Road Damage Dataset
