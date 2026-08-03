@@ -99,17 +99,20 @@ The qualitative results demonstrate that EigenCAM effectively highlights the ima
 
 **Original Test Image**
 
+Figure 1. Original test image selected for qualitative explainability analysis.
 ![Original Test Image](../figures/original_test_image.png)
 
 **YOLOv8 Nano Detection**
 
+Figure 2. YOLOv8 Nano detection showing pothole localization on the selected test image.
 ![YOLO Detection](../figures/yolo_detection.png)
 
 **EigenCAM Visualization**
 
+Figure 3. EigenCAM visualization highlighting the feature representations contributing to the detector's prediction.
 ![EigenCAM Visualization](../figures/eigencam_selected_image.png)
 
-Figure X illustrates the complete explainability workflow adopted in this project. The original road image is first processed by the trained YOLOv8 Nano detector, which successfully localizes the pothole using a bounding box. EigenCAM is subsequently applied to visualize the feature representations responsible for the detector's prediction. The resulting activation map demonstrates that the detector primarily focuses on the damaged pavement region while suppressing unrelated background areas, providing qualitative evidence that the learned features correspond closely to the detected road defect.
+Figures 1–3 illustrate the complete explainability workflow adopted in this project. The original road image is first processed by the trained YOLOv8 Nano detector, which successfully localizes the pothole using a bounding box. EigenCAM is subsequently applied to visualize the feature representations responsible for the detector's prediction. The resulting activation map demonstrates that the detector primarily focuses on the damaged pavement region while suppressing unrelated background areas, providing qualitative evidence that the learned features correspond closely to the detected road defect. 
 
 ## 5. Experimental Setup
 
@@ -140,10 +143,11 @@ These results demonstrate that the lightweight YOLOv8 Nano model was able to lea
 
 ---
 
-### Figure 1. Training Performance
+### Figure 4. Training results across 30 training epochs.
 
 ![Training Results](../figures/results.png)
 
+Figure 4 shows the training and validation metrics across all 30 epochs. The curves indicate stable convergence with no evidence of severe overfitting.
 *Training metrics over 30 epochs showing the convergence behavior of the YOLOv8 Nano model.*
 
 ### 6.2 Class-wise Performance
@@ -159,10 +163,11 @@ Among all classes, potholes achieved the highest detection accuracy. Their large
 
 ---
 
-### Figure 2. Precision–Recall Curve
+### Figure 5. Precision–Recall curve of the trained YOLOv8 Nano detector.
 
 ![Precision–Recall Curve](../figures/BoxPR_curve.png)
 
+Figure 5 presents the Precision–Recall curves for the three road damage categories. Potholes achieved the highest detection performance, while cracks and manholes remained comparatively more challenging.
 *Precision–Recall curve illustrating the trade-off between precision and recall across confidence thresholds.*
 
 ### 6.3 Training Behaviour
@@ -172,10 +177,11 @@ The training visualizations provide additional insight into the detector's learn
 
 ---
 
-### Figure 3. Confusion Matrix
+### Figure 6. Confusion matrix illustrating per-class detection performance.
 
 ![Confusion Matrix](../figures/confusion_matrix.png)
 
+Figure 6 illustrates the confusion matrix of the trained detector. Most prediction errors occurred between crack and manhole categories, whereas potholes were classified more reliably.
 *Confusion matrix showing class-wise prediction performance on the validation dataset.*
 
 ### 6.4 Prediction Examples
