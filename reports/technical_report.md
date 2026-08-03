@@ -99,15 +99,15 @@ The qualitative results demonstrate that EigenCAM effectively highlights the ima
 
 **Original Test Image**
 
-![Original Test Image](figures/original_test_image.png)
+![Original Test Image](../figures/original_test_image.png)
 
 **YOLOv8 Nano Detection**
 
-![YOLO Detection](figures/yolo_detection.png)
+![YOLO Detection](../figures/yolo_detection.png)
 
 **EigenCAM Visualization**
 
-![EigenCAM Visualization](figures/eigencam_selected_image.png)
+![EigenCAM Visualization](../figures/eigencam_selected_image.png)
 
 Figure X illustrates the complete explainability workflow adopted in this project. The original road image is first processed by the trained YOLOv8 Nano detector, which successfully localizes the pothole using a bounding box. EigenCAM is subsequently applied to visualize the feature representations responsible for the detector's prediction. The resulting activation map demonstrates that the detector primarily focuses on the damaged pavement region while suppressing unrelated background areas, providing qualitative evidence that the learned features correspond closely to the detected road defect.
 
